@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "regions": ["gru1"],
+  "name": "icalendar-sync",
+  "builds": [
+    { "src": "www/package.json", "use": "@now/next" },
+    { "src": "api/oauth2/url.js", "use": "@now/node" },
+    { "src": "api/oauth2/token.js", "use": "@now/node" },
+    { "src": "api/calendar/list.js", "use": "@now/node" },
+    { "src": "api/calendar/ical.js", "use": "@now/node" }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/www/$1",
+      "headers": {
+        "x-request-path": "$1"
+      }
+    }
+  ],
+  "alias": [
+    "google-icalendar-sync.now.sh"
+  ],
+  "env": {
+    "GOOGLE_CLIENT_ID": "@icalendar-sync-google-client-id",
+    "GOOGLE_CLIENT_SECRET": "@icalendar-sync-google-client-secret"
+  }
+}
