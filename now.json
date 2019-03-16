@@ -11,6 +11,10 @@
   ],
   "routes": [
     {
+      "src": "/calendar/([^/]+)/([^/]+)/[^.]+\\.ic(al|s)",
+      "dest": "/api/calendar/ical.js?id=$1&t=$2"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/$1"
     },

@@ -10,26 +10,24 @@ const Page = ({
   oAuth2Url,
   calendars,
   url: {
-    query: { tokens },
+    query: { t },
   },
   host,
 }) => (
   <div>
     <h1>Google Icalendar Sync</h1>
-    <p>This is a test</p>
     <a href={oAuth2Url}>url</a>
     {calendars && (
       <ul>
         {calendars.map(calendar => (
           <li>
-            {' '}
             {calendar.summary}:{' '}
             <input
               type="text"
-              value={`https://${host}/api/calendar/ical.js?t=${encodeURIComponent(
-                tokens
-              )}&id=${encodeURIComponent(calendar.id)}`}
-            />{' '}
+              value={`https://${host}/calendar/${encodeURIComponent(
+                calendar.id
+              )}/${encodeURIComponent(t)}/basic.ics`}
+            />
           </li>
         ))}
       </ul>
@@ -38,9 +36,9 @@ const Page = ({
 );
 
 Page.getInitialProps = async ({ req, query }) => {
-  if (query.tokens) {
+  if (query.t) {
     const { data } = await (await fetch(
-      url(req, `/api/calendar/list.js?t=${encodeURIComponent(query.tokens)}`)
+      url(req, `/api/calendar/list.js?t=${encodeURIComponent(query.t)}`)
     )).json();
 
     return {

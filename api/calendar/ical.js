@@ -1,9 +1,10 @@
 const { google } = require('googleapis');
-const OAuth2Client = require('../utils/OAuth2Client');
 const { send } = require('micro');
 const micronize = require('micronize');
 const query = require('micro-query');
 const ical = require('@nickcis/ical-generator');
+const OAuth2Client = require('../utils/OAuth2Client');
+const token = require('../utils/token');
 const {
   getRepeating,
   getStart,
@@ -28,9 +29,9 @@ module.exports = micronize(async (req, res) => {
     return;
   }
 
-  const token = JSON.parse(q.t);
+  const t = token.parse(q.t);
   const oAuth2Client = new OAuth2Client(req);
-  oAuth2Client.setCredentials(token);
+  oAuth2Client.setCredentials(t);
   const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
   const { data } = await calendar.events.list({
     calendarId: q.id,
