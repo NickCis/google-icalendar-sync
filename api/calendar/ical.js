@@ -11,6 +11,7 @@ const {
   getAllDay,
   getAttendee,
   getOrganizer,
+  shouldIgnore,
 } = require('../utils/g2ical');
 
 function getTimeMin() {
@@ -50,6 +51,8 @@ module.exports = micronize(async (req, res) => {
   });
 
   data.items.forEach(item => {
+    if (shouldIgnore(item)) return;
+
     cal.createEvent({
       ...item,
       start: getStart(item),

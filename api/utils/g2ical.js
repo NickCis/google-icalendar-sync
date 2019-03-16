@@ -7,7 +7,7 @@ function parseDate(data) {
     return;
   }
 
-  const [,year,month,day,,hour = '00',min = '00', sec = '00'] = match;
+  const [, year, month, day, , hour = '00', min = '00', sec = '00'] = match;
   return new Date(`${year}-${month}-${day}T${hour}:${min}:${sec}.000Z`);
 }
 
@@ -99,7 +99,7 @@ function getStart(item) {
 function getTimezone(item) {
   const keys = ['start', 'originalStartTime', 'end'];
   for (let i = 0, k; (k = keys[i]); i++) {
-    if (item[k] && item[k].timezone) return item[k].timezone;
+    if (item[k] && item[k].timeZone) return item[k].timeZone;
   }
 }
 
@@ -119,10 +119,15 @@ function getAttendee(attendee) {
 }
 
 function getOrganizer(item) {
-  if (!item.organizer)
-    return;
+  if (!item.organizer) return;
 
   return getAttendee(item.organizer);
+}
+
+function shouldIgnore(item) {
+  if (item.status === 'cancelled' && !item.originalStartTime) return true;
+
+  return false;
 }
 
 module.exports = {
@@ -132,4 +137,5 @@ module.exports = {
   getAllDay,
   getAttendee,
   getOrganizer,
+  shouldIgnore,
 };

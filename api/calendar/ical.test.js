@@ -253,7 +253,6 @@ it('should build ical', async () => {
   );
 
   expect(
-    micro.send.mock.calls[0][2]
-      .replace(/^DTSTAMP:.+$/gm, 'DTSTAMP:')
+    micro.send.mock.calls[0][2].replace(/^DTSTAMP:.+$/gm, 'DTSTAMP:')
   ).toMatchSnapshot();
 });
