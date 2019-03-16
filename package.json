@@ -4,15 +4,20 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "deploy": "yarn now && yarn now alias"
+    "deploy": "yarn now && yarn now alias",
+    "prettier": "prettier --trailing-comma es5 --single-quote --write --write '{api,www}/**/*.js'",
+    "test": "jest"
   },
   "devDependencies": {
-    "now": "^14.0.3"
+    "jest": "^24.5.0",
+    "now": "^14.0.3",
+    "prettier": "^1.16.4"
   },
   "dependencies": {
+    "@nickcis/ical-generator": "^1.6.0-1552772039",
     "googleapis": "^38.0.0",
-    "ical-generator": "^1.6.0",
     "micro": "^9.3.3",
-    "micro-query": "^0.3.0"
+    "micro-query": "^0.3.0",
+    "micronize": "^0.1.0"
   }
 }

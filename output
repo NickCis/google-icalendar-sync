@@ -1,0 +1,302 @@
+{
+  "config": {
+    "url": "https://www.googleapis.com/calendar/v3/calendars/ncis20%40gmail.com/events?maxResults=5",
+    "method": "GET",
+    "headers": {
+      "Accept-Encoding": "gzip",
+      "User-Agent": "google-api-nodejs-client/0.7.2 (gzip)",
+      "Authorization": "Bearer ya29.GlzOBmd6N-8dGpln1-AxybUDIB93Zte5-0VGXctulMlZ9CvtXuwbuiM-f36SCUyz0ulukbw-4CmXf_sXUfTh-hocas9bl-B92aLexr2oTYSfyGrvsLmqkscTRcGang",
+      "Accept": "application/json"
+    },
+    "params": {
+      "maxResults": 5
+    },
+    "responseType": "json"
+  },
+  "data": {
+    "kind": "calendar#events",
+    "etag": "\"p33of56cqjjve00g\"",
+    "summary": "ncis20@gmail.com",
+    "updated": "2019-03-13T03:54:30.086Z",
+    "timeZone": "America/Argentina/Buenos_Aires",
+    "accessRole": "owner",
+    "defaultReminders": [
+      {
+        "method": "popup",
+        "minutes": 10
+      },
+      {
+        "method": "email",
+        "minutes": 10
+      }
+    ],
+    "nextPageToken": "CigKGmpta2RzOWZhcmdpYnQycDNmNThiaXJ2ajRrGAEggICAyIzBsbkTGg0IABIAGPDymZqc_uAC",
+    "items": [
+      {
+        "kind": "calendar#event",
+        "etag": "\"2667888404000000\"",
+        "id": "n6vtf9n6flnodsqn6gho3bvvgo",
+        "status": "tentative",
+        "htmlLink": "https://www.google.com/calendar/event?eid=bjZ2dGY5bjZmbG5vZHNxbjZnaG8zYnZ2Z28gbmNpczIwQG0",
+        "created": "2012-04-09T04:03:21.000Z",
+        "updated": "2012-04-09T04:03:22.000Z",
+        "summary": "Parcial Fisica",
+        "description": "Aula 310",
+        "creator": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "organizer": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "start": {
+          "dateTime": "2012-05-05T09:00:00-03:00"
+        },
+        "end": {
+          "dateTime": "2012-05-05T13:00:00-03:00"
+        },
+        "iCalUID": "n6vtf9n6flnodsqn6gho3bvvgo@google.com",
+        "sequence": 1,
+        "attendees": [
+          {
+            "email": "ncis20@gmail.com",
+            "displayName": "Nicolas Cisco",
+            "organizer": true,
+            "self": true,
+            "responseStatus": "accepted"
+          }
+        ],
+        "extendedProperties": {
+          "shared": {
+            "CalendarSyncAdapter#originalTimezone": "America/Argentina/Buenos_Aires"
+          }
+        },
+        "reminders": {
+          "useDefault": true
+        }
+      },
+      {
+        "kind": "calendar#event",
+        "etag": "\"2670817646000000\"",
+        "id": "lgbhp87mv9n4mvp3uqm1nnrk3s",
+        "status": "tentative",
+        "htmlLink": "https://www.google.com/calendar/event?eid=bGdiaHA4N212OW40bXZwM3VxbTFubnJrM3MgbmNpczIwQG0",
+        "created": "2012-04-26T02:53:43.000Z",
+        "updated": "2012-04-26T02:53:43.000Z",
+        "summary": "Parcial Algos 2",
+        "creator": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "organizer": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "start": {
+          "date": "2012-05-14"
+        },
+        "end": {
+          "date": "2012-05-15"
+        },
+        "iCalUID": "lgbhp87mv9n4mvp3uqm1nnrk3s@google.com",
+        "sequence": 1,
+        "attendees": [
+          {
+            "email": "ncis20@gmail.com",
+            "displayName": "Nicolas Cisco",
+            "organizer": true,
+            "self": true,
+            "responseStatus": "accepted"
+          }
+        ],
+        "extendedProperties": {
+          "shared": {
+            "CalendarSyncAdapter#originalTimezone": "UTC"
+          }
+        },
+        "reminders": {
+          "useDefault": false,
+          "overrides": [
+            {
+              "method": "popup",
+              "minutes": 10
+            },
+            {
+              "method": "email",
+              "minutes": 430
+            }
+          ]
+        }
+      },
+      {
+        "kind": "calendar#event",
+        "etag": "\"2671008968000000\"",
+        "id": "mrgd45qngi6fgl2hh87sfdal2k",
+        "status": "tentative",
+        "htmlLink": "https://www.google.com/calendar/event?eid=bXJnZDQ1cW5naTZmZ2wyaGg4N3NmZGFsMmsgbmNpczIwQG0",
+        "created": "2012-04-27T05:28:04.000Z",
+        "updated": "2012-04-27T05:28:04.000Z",
+        "summary": "Dermatologo Sevinsky Paraguay 2342 9A",
+        "description": "49632687",
+        "creator": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "organizer": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "start": {
+          "dateTime": "2012-05-15T18:00:00-03:00"
+        },
+        "end": {
+          "dateTime": "2012-05-15T19:00:00-03:00"
+        },
+        "iCalUID": "mrgd45qngi6fgl2hh87sfdal2k@google.com",
+        "sequence": 1,
+        "attendees": [
+          {
+            "email": "ncis20@gmail.com",
+            "displayName": "Nicolas Cisco",
+            "organizer": true,
+            "self": true,
+            "responseStatus": "accepted"
+          }
+        ],
+        "extendedProperties": {
+          "shared": {
+            "CalendarSyncAdapter#originalTimezone": "America/Argentina/Buenos_Aires"
+          }
+        },
+        "reminders": {
+          "useDefault": true
+        }
+      },
+      {
+        "kind": "calendar#event",
+        "etag": "\"2671946892000000\"",
+        "id": "vdfk1apnetmq6reamd4dbp8fss",
+        "status": "tentative",
+        "htmlLink": "https://www.google.com/calendar/event?eid=dmRmazFhcG5ldG1xNnJlYW1kNGRicDhmc3MgbmNpczIwQG0",
+        "created": "2012-04-26T02:54:15.000Z",
+        "updated": "2012-05-02T15:44:06.000Z",
+        "summary": "Parcial Álgebra",
+        "description": "Hasta guia 4 inclusive",
+        "creator": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "organizer": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "start": {
+          "date": "2012-05-19"
+        },
+        "end": {
+          "date": "2012-05-20"
+        },
+        "iCalUID": "vdfk1apnetmq6reamd4dbp8fss@google.com",
+        "sequence": 1,
+        "attendees": [
+          {
+            "email": "ncis20@gmail.com",
+            "displayName": "Nicolas Cisco",
+            "organizer": true,
+            "self": true,
+            "responseStatus": "accepted"
+          }
+        ],
+        "extendedProperties": {
+          "shared": {
+            "CalendarSyncAdapter#originalTimezone": "UTC"
+          }
+        },
+        "reminders": {
+          "useDefault": false,
+          "overrides": [
+            {
+              "method": "popup",
+              "minutes": 10
+            },
+            {
+              "method": "email",
+              "minutes": 430
+            }
+          ]
+        }
+      },
+      {
+        "kind": "calendar#event",
+        "etag": "\"2672958708000000\"",
+        "id": "jmkds9fargibt2p3f58birvj4k",
+        "status": "tentative",
+        "htmlLink": "https://www.google.com/calendar/event?eid=am1rZHM5ZmFyZ2lidDJwM2Y1OGJpcnZqNGsgbmNpczIwQG0",
+        "created": "2012-05-08T12:15:54.000Z",
+        "updated": "2012-05-08T12:15:54.000Z",
+        "summary": "Recuperatorio Fisica 7.30",
+        "creator": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "organizer": {
+          "email": "ncis20@gmail.com",
+          "displayName": "Nicolas Cisco",
+          "self": true
+        },
+        "start": {
+          "dateTime": "2012-05-17T07:30:00-03:00"
+        },
+        "end": {
+          "dateTime": "2012-05-17T10:30:00-03:00"
+        },
+        "iCalUID": "jmkds9fargibt2p3f58birvj4k@google.com",
+        "sequence": 1,
+        "attendees": [
+          {
+            "email": "ncis20@gmail.com",
+            "displayName": "Nicolas Cisco",
+            "organizer": true,
+            "self": true,
+            "responseStatus": "accepted"
+          }
+        ],
+        "extendedProperties": {
+          "shared": {
+            "CalendarSyncAdapter#originalTimezone": "America/Argentina/Buenos_Aires"
+          }
+        },
+        "reminders": {
+          "useDefault": true
+        }
+      }
+    ]
+  },
+  "headers": {
+    "alt-svc": "quic=\":443\"; ma=2592000; v=\"46,44,43,39\"",
+    "cache-control": "private, max-age=0, must-revalidate, no-transform",
+    "connection": "close",
+    "content-encoding": "gzip",
+    "content-type": "application/json; charset=UTF-8",
+    "date": "Sat, 16 Mar 2019 02:28:39 GMT",
+    "expires": "Sat, 16 Mar 2019 02:28:39 GMT",
+    "server": "GSE",
+    "transfer-encoding": "chunked",
+    "vary": "Origin, X-Origin",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "SAMEORIGIN",
+    "x-xss-protection": "1; mode=block"
+  },
+  "status": 200,
+  "statusText": "OK"
+}

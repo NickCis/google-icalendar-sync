@@ -1,5 +1,5 @@
 const OAuth2Client = require('../utils/OAuth2Client');
-const micronize = require('../utils/micronize');
+const micronize = require('micronize');
 const { send } = require('micro');
 const scopes = ['https://www.googleapis.com/auth/calendar.readonly'];
 

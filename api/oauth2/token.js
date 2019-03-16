@@ -1,4 +1,4 @@
-const micronize = require('../utils/micronize');
+const micronize = require('micronize');
 const OAuth2Client = require('../utils/OAuth2Client');
 const { send } = require('micro');
 const query = require('micro-query');
@@ -11,7 +11,11 @@ module.exports = micronize(async (req, res) => {
     const oauth2Client = new OAuth2Client(req);
     const { tokens } = await oauth2Client.getToken(q.code);
 
-    redirect(res, `/?tokens=${encodeURIComponent(JSON.stringify(tokens))}`, 302);
+    redirect(
+      res,
+      `/?tokens=${encodeURIComponent(JSON.stringify(tokens))}`,
+      302
+    );
     return;
   }
 
