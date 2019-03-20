@@ -24,7 +24,7 @@ const Page = ({
             {calendar.summary}:{' '}
             <input
               type="text"
-              value={`https://${host}/calendar/${encodeURIComponent(
+              value={`https://${host}/c/${encodeURIComponent(
                 calendar.id
               )}/${encodeURIComponent(t)}/basic.ics`}
             />

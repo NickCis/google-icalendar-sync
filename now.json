@@ -11,7 +11,7 @@
   ],
   "routes": [
     {
-      "src": "/calendar/([^/]+)/([^/]+)/[^.]+\\.ic(al|s)",
+      "src": "/c/([^/]+)/([^/]+)(/|$)([^.]+\\.ic(al|s))?",
       "dest": "/api/calendar/ical.js?id=$1&t=$2"
     },
     {
@@ -27,7 +27,7 @@
     }
   ],
   "alias": [
-    "google-icalendar-sync.now.sh"
+    "gics.now.sh"
   ],
   "env": {
     "GOOGLE_CLIENT_ID": "@icalendar-sync-google-client-id",

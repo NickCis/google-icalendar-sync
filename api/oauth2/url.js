@@ -8,6 +8,7 @@ module.exports = micronize(async (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: scopes,
+    prompt: 'consent',
   });
 
   send(res, 200, { url });
