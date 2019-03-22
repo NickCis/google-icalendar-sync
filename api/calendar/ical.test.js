@@ -7,6 +7,7 @@ const mockCalendar = {
 jest.mock('micro', () => ({ send: jest.fn() }));
 jest.mock('micro-query', () => jest.fn());
 jest.mock('micronize', () => jest.fn(f => f));
+jest.mock('micro-morgan', () => jest.fn(() => f => f));
 jest.mock('googleapis', () => ({
   google: {
     calendar: jest.fn().mockReturnValue(mockCalendar),

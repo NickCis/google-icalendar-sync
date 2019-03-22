@@ -1,4 +1,10 @@
-function parseDate(data) {
+const moment = require('moment-timezone');
+
+function iana2timezone(iana) {
+  return moment.tz(iana).format('Z');
+}
+
+function parseDate(data, timezone = 'Z') {
   // 20180727T025959Z or 20190620
   const match = /^(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})Z?)?$/.exec(data);
 
@@ -8,7 +14,9 @@ function parseDate(data) {
   }
 
   const [, year, month, day, , hour = '00', min = '00', sec = '00'] = match;
-  return new Date(`${year}-${month}-${day}T${hour}:${min}:${sec}.000Z`);
+  return new Date(
+    `${year}-${month}-${day}T${hour}:${min}:${sec}.000${timezone}`
+  );
 }
 
 function getRepeating(item) {
@@ -61,13 +69,14 @@ function getRepeating(item) {
         break;
 
       case 'EXDATE':
+        let timezone = 'Z';
         if (extra) {
           extra.forEach(pair => {
             const [key, data] = pair.split('=');
 
             switch (key) {
               case 'TZID':
-                rep.excludeTimezone = data;
+                timezone = iana2timezone(data);
                 break;
 
               default:
@@ -77,7 +86,9 @@ function getRepeating(item) {
           });
         }
 
-        rep.exclude = data.split(',').map(parseDate);
+        rep.exclude = (rep.exclude || []).concat(
+          data.split(',').map(d => parseDate(d, timezone))
+        );
         break;
 
       default:
@@ -89,10 +100,21 @@ function getRepeating(item) {
   }, {});
 }
 
+function getDate(value) {
+  if (!value) return;
+
+  if (value.dateTime) {
+    if (/(Z|[+-]\d{2}(:\d{2})?)$/.exec(value.dateTime)) return value.dateTime;
+    return `${value.dateTime}${iana2timezone(value.timeZone)}`;
+  }
+  return value.date;
+}
+
 function getStart(item) {
   const keys = ['start', 'originalStartTime'];
   for (let i = 0, k; (k = keys[i]); i++) {
-    if (item[k]) return new Date(item[k].dateTime || item[k].date);
+    const date = getDate(item[k]);
+    if (date) return date;
   }
 }
 
@@ -130,7 +152,20 @@ function shouldIgnore(item) {
   return false;
 }
 
+function isCanceledRecurringInstance(item) {
+  if (
+    item.status === 'cancelled' &&
+    item.recurringEventId &&
+    item.originalStartTime
+  )
+    return true;
+
+  return false;
+}
+
 module.exports = {
+  parseDate,
+  getDate,
   getRepeating,
   getStart,
   getTimezone,
@@ -138,4 +173,5 @@ module.exports = {
   getAttendee,
   getOrganizer,
   shouldIgnore,
+  isCanceledRecurringInstance,
 };

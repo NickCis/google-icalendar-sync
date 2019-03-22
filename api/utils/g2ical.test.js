@@ -116,8 +116,7 @@ describe('getRepeating', () => {
         ],
       })
     ).toEqual({
-      exclude: [new Date('2018-08-03T11:15:00.000Z')],
-      excludeTimezone: 'America/Argentina/Buenos_Aires',
+      exclude: [new Date('2018-08-03T14:15:00.000Z')]
     });
   });
 });
