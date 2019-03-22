@@ -58,22 +58,29 @@ module.exports = micronize(
       // ttl: ?
     });
 
-    // TODO: when a cancel event is found, try to add the EXDATE to the repeating event
+    const trailingExclude = {};
     const events = {};
 
     data.items.forEach(item => {
       if (isCanceledRecurringInstance(item)) {
         const originalEvent = events[item.recurringEventId];
-        const repeating = {
-          ...originalEvent.repeating(),
-        };
+        const date = getDate(item.originalStartTime);
 
-        repeating.exclude = [
-          ...(repeating.exclude || []),
-          getDate(item.originalStartTime),
-        ];
+        if (originalEvent) {
+          const repeating = {
+            ...originalEvent.repeating(),
+            date,
+          };
 
-        originalEvent.repeating(repeating);
+          repeating.exclude = [...(repeating.exclude || []), date];
+
+          originalEvent.repeating(repeating);
+        } else {
+          trailingExclude[item.recurringEventId] = [
+            ...(trailingExclude[item.recurringEventId] || []),
+            date,
+          ];
+        }
 
         return;
       }
@@ -89,7 +96,7 @@ module.exports = micronize(
         allDay: getAllDay(item),
         lastModified: item.updated && new Date(item.updated),
         url: item.htmlLink,
-        repeating: getRepeating(item),
+        repeating: getRepeating(item, trailingExclude[item.id]),
         // recurrenceId: item.recurringEventId, // TODO:
         organizer: getOrganizer(item),
         attendees: item.attendees && item.attendees.map(getAttendee),

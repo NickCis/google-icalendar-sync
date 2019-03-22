@@ -19,85 +19,90 @@ function parseDate(data, timezone = 'Z') {
   );
 }
 
-function getRepeating(item) {
+function getRepeating(item, trailingExclude) {
   const { recurrence } = item;
 
   if (!recurrence) return;
 
-  return recurrence.reduce((rep, r) => {
-    const [_key, data] = r.split(':');
-    const [key, ...extra] = _key.split(';');
+  return recurrence.reduce(
+    (rep, r) => {
+      const [_key, data] = r.split(':');
+      const [key, ...extra] = _key.split(';');
 
-    switch (key) {
-      case 'RRULE':
-        data.split(';').forEach(pair => {
-          const [key, data] = pair.split('=');
-
-          switch (key) {
-            case 'FREQ':
-            case 'INTERVAL':
-            case 'COUNT':
-              rep[key.toLowerCase()] = data;
-              break;
-
-            case 'UNTIL':
-              rep.until = parseDate(data);
-              break;
-
-            case 'BYDAY':
-              rep.byDay = data.split(',');
-              break;
-
-            case 'BYMONTH':
-              rep.byMonth = data;
-              break;
-
-            case 'BYMONTHDAY':
-              rep.byMonthDay = data;
-              break;
-
-            case 'BYSETPOS':
-              rep.bySetPos = data;
-              break;
-
-            default:
-              console.log(`RRULE: Unknown key ${key} :: ${data}`);
-              break;
-          }
-        });
-
-        break;
-
-      case 'EXDATE':
-        let timezone = 'Z';
-        if (extra) {
-          extra.forEach(pair => {
+      switch (key) {
+        case 'RRULE':
+          data.split(';').forEach(pair => {
             const [key, data] = pair.split('=');
 
             switch (key) {
-              case 'TZID':
-                timezone = iana2timezone(data);
+              case 'FREQ':
+              case 'INTERVAL':
+              case 'COUNT':
+                rep[key.toLowerCase()] = data;
+                break;
+
+              case 'UNTIL':
+                rep.until = parseDate(data);
+                break;
+
+              case 'BYDAY':
+                rep.byDay = data.split(',');
+                break;
+
+              case 'BYMONTH':
+                rep.byMonth = data;
+                break;
+
+              case 'BYMONTHDAY':
+                rep.byMonthDay = data;
+                break;
+
+              case 'BYSETPOS':
+                rep.bySetPos = data;
                 break;
 
               default:
-                console.log(`EXDATE: Unknown key ${key} :: ${data}`);
+                console.log(`RRULE: Unknown key ${key} :: ${data}`);
                 break;
             }
           });
-        }
 
-        rep.exclude = (rep.exclude || []).concat(
-          data.split(',').map(d => parseDate(d, timezone))
-        );
-        break;
+          break;
 
-      default:
-        console.log(`Unknown key: ${key} :: ${data}`);
-        break;
+        case 'EXDATE':
+          let timezone = 'Z';
+          if (extra) {
+            extra.forEach(pair => {
+              const [key, data] = pair.split('=');
+
+              switch (key) {
+                case 'TZID':
+                  timezone = iana2timezone(data);
+                  break;
+
+                default:
+                  console.log(`EXDATE: Unknown key ${key} :: ${data}`);
+                  break;
+              }
+            });
+          }
+
+          rep.exclude = (rep.exclude || []).concat(
+            data.split(',').map(d => parseDate(d, timezone))
+          );
+          break;
+
+        default:
+          console.log(`Unknown key: ${key} :: ${data}`);
+          break;
+      }
+
+      return rep;
+    },
+    {
+      exclude: trailingExclude,
     }
-
-    return rep;
-  }, {});
+  );
 }
 
 function getDate(value) {

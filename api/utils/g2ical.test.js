@@ -116,7 +116,7 @@ describe('getRepeating', () => {
         ],
       })
     ).toEqual({
-      exclude: [new Date('2018-08-03T14:15:00.000Z')]
+      exclude: [new Date('2018-08-03T14:15:00.000Z')],
     });
   });
 });

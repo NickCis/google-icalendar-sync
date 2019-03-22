@@ -230,7 +230,6 @@ it('should build ical', async () => {
               useDefault: true,
             },
           },
-
           {
             kind: 'calendar#event',
             etag: '"etag"',
@@ -239,6 +238,57 @@ it('should build ical', async () => {
             recurringEventId: 'item-id-4',
             originalStartTime: {
               date: '2019-04-17',
+            },
+          },
+          {
+            kind: 'calendar#event',
+            etag: '"etag"',
+            id: 'item-id-6',
+            status: 'cancelled',
+            recurringEventId: 'item-id-7',
+            originalStartTime: {
+              dateTime: '2019-03-16T10:00:00.000',
+              timeZone: 'America/Buenos_Aires',
+            },
+          },
+          {
+            kind: 'calendar#event',
+            etag: '"etag"',
+            id: 'item-id-7',
+            status: 'confirmed',
+            htmlLink: 'https://www.google.com/calendar/event?eid=XXXXXXXXXXXX',
+            created: '2019-03-16T05:55:02.000Z',
+            updated: '2019-03-16T05:55:02.849Z',
+            summary: 'Test: Cada mes 3er miercoles',
+            creator: {
+              email: 'email@gmail.com',
+              displayName: 'My Name',
+              self: true,
+            },
+            organizer: {
+              email: 'email@gmail.com',
+              displayName: 'My Name',
+              self: true,
+            },
+            start: {
+              dateTime: '2019-03-16T10:00:00.000',
+              timeZone: 'America/Buenos_Aires',
+            },
+            end: {
+              dateTime: '2019-03-16T11:00:00.000',
+              timeZone: 'America/Buenos_Aires',
+            },
+            recurrence: ['RRULE:FREQ=MONTHLY;BYDAY=3WE'],
+            transparency: 'transparent',
+            iCalUID: 'item-id-7@google.com',
+            sequence: 0,
+            extendedProperties: {
+              private: {
+                everyoneDeclinedDismissed: '-1',
+              },
+            },
+            reminders: {
+              useDefault: true,
             },
           },
         ],
