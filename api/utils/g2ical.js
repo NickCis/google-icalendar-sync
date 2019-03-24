@@ -168,6 +168,10 @@ function isCanceledRecurringInstance(item) {
   return false;
 }
 
+function getId(item) {
+  return item.recurringEventId || item.id;
+}
+
 module.exports = {
   parseDate,
   getDate,
@@ -179,4 +183,5 @@ module.exports = {
   getOrganizer,
   shouldIgnore,
   isCanceledRecurringInstance,
+  getId,
 };

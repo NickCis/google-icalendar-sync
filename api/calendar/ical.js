@@ -16,6 +16,7 @@ const {
   getOrganizer,
   shouldIgnore,
   isCanceledRecurringInstance,
+  getId,
 } = require('../utils/g2ical');
 
 function getTimeMin() {
@@ -89,6 +90,7 @@ module.exports = micronize(
 
       events[item.id] = cal.createEvent({
         ...item,
+        id: getId(item),
         start: getStart(item),
         end: getDate(item.end),
         timezone: getTimezone(item),
@@ -97,7 +99,7 @@ module.exports = micronize(
         lastModified: item.updated && new Date(item.updated),
         url: item.htmlLink,
         repeating: getRepeating(item, trailingExclude[item.id]),
-        // recurrenceId: item.recurringEventId, // TODO:
+        recurrenceId: getDate(item.originalStartTime),
         organizer: getOrganizer(item),
         attendees: item.attendees && item.attendees.map(getAttendee),
       });
