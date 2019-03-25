@@ -313,6 +313,154 @@ it('should build ical', async () => {
   ).toMatchSnapshot();
 });
 
+it('should add EXDATE (from cancelled) to recurring events', async () => {
+  const req = {
+    headers: {
+      host: 'test.host',
+    },
+  };
+  const res = {
+    setHeader: jest.fn(),
+  };
+
+  query.mockReturnValue({
+    t: JSON.stringify('token'),
+    id: 'id',
+  });
+
+  mockCalendar.events.list.mockReturnValue(
+    Promise.resolve(
+      createEventsListResponse([
+        {
+          kind: 'calendar#event',
+          etag: '"etag"',
+          id: 'item-id-4',
+          status: 'confirmed',
+          htmlLink: 'https://www.google.com/calendar/event?eid=XXXXXXXXXXXX',
+          created: '2019-03-16T05:55:02.000Z',
+          updated: '2019-03-16T05:55:02.849Z',
+          summary: 'Test: Cada mes 3er miercoles',
+          creator: {
+            email: 'email@gmail.com',
+            displayName: 'My Name',
+            self: true,
+          },
+          organizer: {
+            email: 'email@gmail.com',
+            displayName: 'My Name',
+            self: true,
+          },
+          start: {
+            date: '2019-03-20',
+          },
+          end: {
+            date: '2019-03-21',
+          },
+          recurrence: ['RRULE:FREQ=MONTHLY;BYDAY=3WE'],
+          transparency: 'transparent',
+          iCalUID: 'item-id-4@google.com',
+          sequence: 0,
+          extendedProperties: {
+            private: {
+              everyoneDeclinedDismissed: '-1',
+            },
+          },
+          reminders: {
+            useDefault: true,
+          },
+        },
+        {
+          kind: 'calendar#event',
+          etag: '"etag"',
+          id: 'item-id-5',
+          status: 'cancelled',
+          recurringEventId: 'item-id-4',
+          originalStartTime: {
+            date: '2019-04-17',
+          },
+        },
+      ])
+    )
+  );
+
+  await ical(req, res);
+  expect(micro.send.mock.calls[0][2]).toMatch(/^EXDATE;VALUE=DATE:20190417$/m);
+});
+
+it('should add EXDATE (from cancelled) to recurring events (cancelled appears first)', async () => {
+  const req = {
+    headers: {
+      host: 'test.host',
+    },
+  };
+  const res = {
+    setHeader: jest.fn(),
+  };
+
+  query.mockReturnValue({
+    t: JSON.stringify('token'),
+    id: 'id',
+  });
+
+  mockCalendar.events.list.mockReturnValue(
+    Promise.resolve(
+      createEventsListResponse([
+        {
+          kind: 'calendar#event',
+          etag: '"etag"',
+          id: 'item-id-5',
+          status: 'cancelled',
+          recurringEventId: 'item-id-4',
+          originalStartTime: {
+            date: '2019-04-17',
+          },
+        },
+        {
+          kind: 'calendar#event',
+          etag: '"etag"',
+          id: 'item-id-4',
+          status: 'confirmed',
+          htmlLink: 'https://www.google.com/calendar/event?eid=XXXXXXXXXXXX',
+          created: '2019-03-16T05:55:02.000Z',
+          updated: '2019-03-16T05:55:02.849Z',
+          summary: 'Test: Cada mes 3er miercoles',
+          creator: {
+            email: 'email@gmail.com',
+            displayName: 'My Name',
+            self: true,
+          },
+          organizer: {
+            email: 'email@gmail.com',
+            displayName: 'My Name',
+            self: true,
+          },
+          start: {
+            date: '2019-03-20',
+          },
+          end: {
+            date: '2019-03-21',
+          },
+          recurrence: ['RRULE:FREQ=MONTHLY;BYDAY=3WE'],
+          transparency: 'transparent',
+          iCalUID: 'item-id-4@google.com',
+          sequence: 0,
+          extendedProperties: {
+            private: {
+              everyoneDeclinedDismissed: '-1',
+            },
+          },
+          reminders: {
+            useDefault: true,
+          },
+        },
+      ])
+    )
+  );
+
+  await ical(req, res);
+  expect(micro.send.mock.calls[0][2]).toMatch(/^EXDATE;VALUE=DATE:20190417$/m);
+});
+
 it('should handle recurring events moved', async () => {
   const req = {
     headers: {

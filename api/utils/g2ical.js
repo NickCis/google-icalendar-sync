@@ -13,10 +13,12 @@ function parseDate(data, timezone = 'Z') {
     return;
   }
 
-  const [, year, month, day, , hour = '00', min = '00', sec = '00'] = match;
-  return new Date(
-    `${year}-${month}-${day}T${hour}:${min}:${sec}.000${timezone}`
-  );
+  const [, year, month, day, , hour, min, sec] = match;
+  const date = `${year}-${month}-${day}`;
+
+  if (!hour) return date;
+
+  return `${date}T${hour}:${min}:${sec}.000${timezone}`;
 }
 
 function getRepeating(item, trailingExclude) {
@@ -78,6 +80,9 @@ function getRepeating(item, trailingExclude) {
               switch (key) {
                 case 'TZID':
                   timezone = iana2timezone(data);
+                  break;
+
+                case 'VALUE':
                   break;
 
                 default:

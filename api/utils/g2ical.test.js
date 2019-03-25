@@ -71,7 +71,7 @@ describe('getRepeating', () => {
       })
     ).toEqual({
       freq: 'DAILY',
-      until: new Date('2018-07-27T02:59:59.000Z'),
+      until: '2018-07-27T02:59:59.000Z',
     });
   });
 
@@ -82,7 +82,7 @@ describe('getRepeating', () => {
       })
     ).toEqual({
       freq: 'DAILY',
-      until: new Date('2018-07-27T00:00:00.000Z'),
+      until: '2018-07-27',
     });
   });
 
@@ -116,7 +116,51 @@ describe('getRepeating', () => {
         ],
       })
     ).toEqual({
-      exclude: [new Date('2018-08-03T14:15:00.000Z')],
+      exclude: ['2018-08-03T11:15:00.000-03:00'],
+    });
+  });
+
+  it('should parse EXDATE (VALUE=DATE)', () => {
+    expect(
+      getRepeating({
+        recurrence: ['EXDATE;VALUE=DATE:20180803'],
+      })
+    ).toEqual({
+      exclude: ['2018-08-03'],
+    });
+  });
+
+  it('should parse several EXDATE', () => {
+    expect(
+      getRepeating({
+        recurrence: [
+          'EXDATE;TZID=America/Argentina/Buenos_Aires:20180803T111500',
+          'EXDATE;TZID=America/Argentina/Buenos_Aires:20180803T121500',
+        ],
+      })
+    ).toEqual({
+      exclude: [
+        '2018-08-03T11:15:00.000-03:00',
+        '2018-08-03T12:15:00.000-03:00',
+      ],
+    });
+  });
+
+  it('should parse EXDATE (use trailingExlude)', () => {
+    expect(
+      getRepeating(
+        {
+          recurrence: [
+            'EXDATE;TZID=America/Argentina/Buenos_Aires:20180803T111500',
+          ],
+        },
+        ['2018-08-03T10:15:00.000-03:00']
+      )
+    ).toEqual({
+      exclude: [
+        '2018-08-03T10:15:00.000-03:00',
+        '2018-08-03T11:15:00.000-03:00',
+      ],
     });
   });
 });
