@@ -4,10 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "compose-function": "^3.0.3",
     "isomorphic-unfetch": "^3.0.0",
+    "jss": "^9.8.7",
     "next": "^8.0.3",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "react-jss": "^8.6.1"
   },
   "scripts": {
     "now-build": "next build"

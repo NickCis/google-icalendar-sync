@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@nickcis/ical-generator": "1.6.0-20190322194000",
+    "compose-function": "^3.0.3",
     "googleapis": "^38.0.0",
     "micro": "^9.3.3",
     "micro-morgan": "^0.1.0",
