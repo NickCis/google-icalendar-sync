@@ -37,7 +37,7 @@ const CalendarListItem = ({ host, calendar, token, classes }) => {
             fullWidth
             value={`https://${host}/c/${encodeURIComponent(
               calendar.id
-            )}/${encodeURIComponent(token)}/basic.ics`}
+            )}/${encodeURIComponent(token)}/b.ics`}
           />
         </RootRef>
       </TableCell>
