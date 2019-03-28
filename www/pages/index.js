@@ -85,7 +85,7 @@ const Page = ({
         {error && <Error error={error} />}
 
         {oAuth2Url && (
-          <Button variant="contained" component="a" url={oAuth2Url}>
+          <Button variant="contained" component="a" href={oAuth2Url}>
             <GoogleIcon className={classes.leftIcon} />
             Sign In with Google
           </Button>
